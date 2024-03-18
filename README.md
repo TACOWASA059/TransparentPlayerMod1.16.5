@@ -17,9 +17,9 @@ int:0-255
 ```
 /transparent set <Player> <value>
 ```
-アルファ値のリセット
+アルファ値のリセット(255にする)
 ```
-/transparent reset <Player> <value>
+/transparent reset <Player>
 ```
 アルファ値の加算
 ```
