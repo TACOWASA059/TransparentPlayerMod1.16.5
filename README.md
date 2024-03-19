@@ -4,7 +4,10 @@ forge 36.2.39
 
 ## プレイヤーNBT
 ForgeCaps."transparentplayermod:alpha"を追加(読み取り専用)
+
 int:0-255
+0:透明
+255:不透明
 ```
 /data get entity @s ForgeCaps."transparentplayermod:alpha"
 ```
@@ -32,5 +35,4 @@ int:0-255
 
 ## 注意
 - セレクター指定は可能
-- シングルの場合は/transparentコマンドはset以外機能しない
 - クライアントとサーバー両方に導入必須
