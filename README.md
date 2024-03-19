@@ -11,6 +11,10 @@ int:0-255
 ```
 /data get entity @s ForgeCaps."transparentplayermod:alpha"
 ```
+セレクターの指定
+```
+/execute as @a[nbt={ForgeCaps:{"transparentplayermod:alpha":{alpha:255}}}] run transparent get @s
+```
 ## コマンド
 アルファ値を取得
 ```
