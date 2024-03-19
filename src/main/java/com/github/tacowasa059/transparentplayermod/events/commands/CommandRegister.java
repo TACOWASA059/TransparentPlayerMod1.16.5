@@ -9,6 +9,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
@@ -34,7 +35,7 @@ public class CommandRegister {
     public static void registerCommands(RegisterCommandsEvent event) {
         if (FMLEnvironment.dist.isClient()) {
             onClientCommandRegister(event);
-        } else {
+        }else{
             onServerCommandRegister(event);
         }
     }
@@ -120,10 +121,9 @@ public class CommandRegister {
                 UUID uuid = playerEntity.getUniqueID();
                 MinecraftServer server = source.getServer();
                 ModUtils.sendOnetoAllClient(server, uuid, data);
-
-                source.sendFeedback(new StringTextComponent(TextFormatting.GREEN + "Alpha Value:" + TextFormatting.AQUA + value), false);
             });
         }
+        source.sendFeedback(new StringTextComponent(TextFormatting.GREEN + "modified Alpha Value"), false);
     }
 
     public static void onClientCommandRegister(RegisterCommandsEvent event) {
