@@ -40,8 +40,6 @@ public abstract class MixinLivingRenderer <T extends LivingEntity, M extends Ent
         super(null);
         this.layerRenderers = layerRenderers;
     }
-
-    @Shadow protected float getSwingProgress(T p_77040_1_, float p_77040_2_){return 1.0f;};
     @Shadow
     protected float handleRotationFloat(T p2256231, float p2256233) {return 1.0f;}
     @Shadow

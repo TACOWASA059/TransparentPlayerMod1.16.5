@@ -21,10 +21,8 @@ public class ModUtils {
             });
         }
     }
-    public static void sendOnetoAllClient(MinecraftServer server, UUID uuid,int alpha){
+    public static void sendOnetoAllClient(UUID uuid,int alpha){
         UpdateAlphaPacket packet= new UpdateAlphaPacket(uuid,alpha);
-        for (ServerPlayerEntity player : server.getPlayerList().getPlayers()) {
-            PacketHandler.channel.send(PacketDistributor.PLAYER.with(() -> player), packet);
-        }
+        PacketHandler.channel.send(PacketDistributor.ALL.noArg(), packet);
     }
 }

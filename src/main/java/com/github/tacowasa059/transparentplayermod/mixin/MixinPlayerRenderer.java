@@ -19,8 +19,6 @@ public class MixinPlayerRenderer {
     @Shadow
     private void setModelVisibilities(AbstractClientPlayerEntity clientPlayer) {
     }
-    // Yes this method is basically the same but this is better than
-    // trying to overwrite incase someone else does some funkiness
     @Inject(at = @At("HEAD"), method = "renderItem(Lcom/mojang/blaze3d/matrix/MatrixStack;Lnet/minecraft/client/renderer/IRenderTypeBuffer;ILnet/minecraft/client/entity/player/AbstractClientPlayerEntity;Lnet/minecraft/client/renderer/model/ModelRenderer;Lnet/minecraft/client/renderer/model/ModelRenderer;)V",cancellable = true)
     private void renderItem(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, AbstractClientPlayerEntity playerIn, ModelRenderer rendererArmIn, ModelRenderer rendererArmwearIn, CallbackInfo ci) {
 

@@ -4,11 +4,14 @@ import com.github.tacowasa059.transparentplayermod.capabilities.provider.AlphaVa
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.UUID;
 import java.util.function.Supplier;
 
+//server to client
 public class UpdateAlphaPacket {
     private final UUID playerUUID;
     private final int alphaValue;
@@ -29,17 +32,18 @@ public class UpdateAlphaPacket {
 
     public static void handle(UpdateAlphaPacket msg, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            Minecraft mc = Minecraft.getInstance();
-            if (mc.world != null) {
-                PlayerEntity player = mc.world.getPlayerByUuid(msg.playerUUID);
-                int alpha= msg.alphaValue;
-                if (player != null) {
-                    player.getCapability(AlphaValueProvider.capability).ifPresent(alphaValue1 -> {
-                        alphaValue1.setAlpha(alpha);
-                    });
-                }
-            }
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT.CLIENT, () -> () -> UpdateAlphaPacket.handlePacket(msg, ctx));
         });
         ctx.get().setPacketHandled(true);
+    }
+    private static void handlePacket(UpdateAlphaPacket msg,Supplier<NetworkEvent.Context> ctx){
+        Minecraft mc = Minecraft.getInstance();
+        if (mc==null||mc.world == null) return;
+        PlayerEntity player = mc.world.getPlayerByUuid(msg.playerUUID);
+        if (player == null) return;
+        int alpha= msg.alphaValue;
+        player.getCapability(AlphaValueProvider.capability).ifPresent(alphaValue1 -> {
+            alphaValue1.setAlpha(alpha);
+        });
     }
 }

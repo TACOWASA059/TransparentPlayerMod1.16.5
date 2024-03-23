@@ -1,8 +1,6 @@
 package com.github.tacowasa059.transparentplayermod.capabilities.provider;
 
 import com.github.tacowasa059.transparentplayermod.capabilities.entity.AlphaValue;
-import com.github.tacowasa059.transparentplayermod.capabilities.entity.IAlphaValue;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.*;
